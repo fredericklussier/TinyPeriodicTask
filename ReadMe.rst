@@ -23,7 +23,7 @@ Usage
 
 .. code-block:: python
 
-    from PeriodicTask import PeriodicTask
+    from TinyPeriodicTask import TinyPeriodicTask
 
     #The function to periodically run
     def task(message='this'):
