@@ -13,6 +13,9 @@ the time has no interference to the main execution, and vice versa.
 
 When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
+
+.. code-block:: python
+
     task = TinyPeriodicTask(3, task, message='that') 
 
 Usage
