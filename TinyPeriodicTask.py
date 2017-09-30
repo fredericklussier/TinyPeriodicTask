@@ -33,7 +33,7 @@ Usage:
   task2.start()
 
   try:
-    #Keep the main process alive 
+    #Keep the main process alive
     # otherwise the task will be executed only one time
     while True:
       time.sleep(0.5)
@@ -49,8 +49,10 @@ class TinyPeriodicTask(object):
         Set a periodic execution of a task.
 
         :param int interval: time in second between execution.
-        :param func callback: callable function to call once the interval is reach.
-        :param *args, **kwargs : parameter(s) to use when executing the callback function.
+        :param func callback: callable function to call once the interval
+         is reach.
+        :param *args, **kwargs: parameter(s) to use when executing the
+         callback function.
         """
         self._interval = interval if interval > 0 else 1
         self._callback = functools.partial(callback, *args, **kwargs)
