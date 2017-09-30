@@ -13,23 +13,23 @@ any parameters you need to use when executing the callback. like this:
 Usage
 -----
 .. code-block:: python
-  from PeriodicTask import PeriodicTask
+    from PeriodicTask import PeriodicTask
 
-  #The function to periodically run
-  def task(message='this'):
-    print("I'm working on {0}".format(message))
+    #The function to periodically run
+    def task(message='this'):
+        print("I'm working on {0}".format(message))
 
-  task = TinyPeriodicTask(3, task)
-  task.start()
+    task = TinyPeriodicTask(3, task)
+    task.start()
 
-  task2 = TinyPeriodicTask(3, task, message='that')
-  task2.start()
+    task2 = TinyPeriodicTask(3, task, message='that')
+    task2.start()
 
-  try:
-    #Keep the main process alive 
-    # otherwise the task will be executed only one time
-    while True:
-      time.sleep(0.5)
+    try:
+        #Keep the main process alive 
+        # otherwise the task will be executed only one time
+        while True:
+            time.sleep(0.5)
 
-  except KeyboardInterrupt:
-     task.stop()
+    except KeyboardInterrupt:
+        task.stop()
