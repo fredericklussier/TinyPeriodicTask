@@ -10,7 +10,9 @@ When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
     task = TinyPeriodicTask(3, task, message='that') 
 
-Usage:
+Usage
+-----
+.. code-block:: python
   from PeriodicTask import PeriodicTask
 
   #The function to periodically run
