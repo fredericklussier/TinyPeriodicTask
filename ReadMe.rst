@@ -63,7 +63,7 @@ start
 ~~~~~~~~
 Start the periodic runner
 
-If the runner is stopped, it will restart.
+If the runner is stopped, it will restart. Id it is already started, it will do nothing.
 
 .. code-block:: python
 
