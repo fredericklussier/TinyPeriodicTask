@@ -21,7 +21,7 @@ please read https://help.github.com/articles/cloning-a-repository/
 
 .. code-block:: batch
 
-$ git clone https://github.com/fredericklussier/TinyPeriodicTask.git
+    $ git clone https://github.com/fredericklussier/TinyPeriodicTask.git
 
 In the future, I expect to have a setup using pip.
 
