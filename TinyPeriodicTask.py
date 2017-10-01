@@ -92,14 +92,11 @@ class TinyPeriodicTask(object):
     def useThis(self, *args, **kwargs):
         """
         Change parameter of the callback function.
-        This will restart the runner once the parameters changed. 
 
         :param *args, **kwargs: parameter(s) to use when executing the
          callback function.
         """
-        self.stop()
         self._callback = functools.partial(self._callback, *args, **kwargs)
-        self.start()
 
     def stop(self):
         """
