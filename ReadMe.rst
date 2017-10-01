@@ -6,7 +6,7 @@ Set a simple periodic execution of a function.
 Concepts
 --------
 * interval: time in second between executions.
-* callback: callable function to call once the interval is reach.
+* callback: callable function to run once the interval is reach.
 
 The interval time is running in a deamon thread. This to ensure
 the time has no interference to the main execution, and vice versa.
