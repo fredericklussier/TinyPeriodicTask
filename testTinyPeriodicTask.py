@@ -14,8 +14,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         count = 0
 
         def callableFunction():
-            nonlocal count
-            nonlocal start_time
+            nonlocal count, start_time
             count += 1
             if count > 1:
                 self.assertAlmostEqual(time.time() - start_time, 1, 0)

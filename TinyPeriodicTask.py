@@ -20,26 +20,49 @@ any parameters you need to use when executing the callback. like this:
 
 Usage:
 .. code-block:: python
-  from TinyPeriodicTask import TinyPeriodicTask
 
-  #The function to periodically run
-  def task(message='this'):
-    print("I'm working on {0}".format(message))
+    from TinyPeriodicTask import TinyPeriodicTask
 
-  task = TinyPeriodicTask(3, task)
-  task.start()
+    #The function to periodically run
+    def task(message='this'):
+        print("I'm working on {0}".format(message))
 
-  task2 = TinyPeriodicTask(3, task, message='that')
-  task2.start()
+    task = TinyPeriodicTask(3, task)
+    task.start()
 
-  try:
-    #Keep the main process alive
-    # otherwise the task will be executed only one time
-    while True:
-      time.sleep(0.5)
+    task2 = TinyPeriodicTask(3, task, message='that')
+    task2.start()
 
-  except KeyboardInterrupt:
-     task.stop()
+    try:
+        print('Execution en cours')
+        #Keep the main process alive 
+        # otherwise the task will be executed only one time
+        while True:
+            time.sleep(0.5)
+
+    except KeyboardInterrupt:
+        task1.stop()
+        task2.stop()
+        print('Loop stopped')
+
+Result:
+
+.. code-block:: batch
+
+    $ python exemple.py
+    I'm working on that
+    Execution en cours
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    Loop stopped
 """
 
 
@@ -48,17 +71,28 @@ class TinyPeriodicTask(object):
         """
         Set a periodic execution of a task.
 
-        :param int interval: time in second between execution.
+        :param int interval: time in second between executions.
         :param func callback: callable function to call once the interval
          is reach.
         :param *args, **kwargs: parameter(s) to use when executing the
          callback function.
         """
-        self._interval = interval if interval > 0 else 1
+        self._setInterval(interval)
         self._isRunning = False
         self._callback = functools.partial(callback, *args, **kwargs)
         # End the thread once setted.
         self._cease = threading.Event()
+
+    @property
+    def interval(self):
+        """
+        this is the interval property that mention to the runner
+        the time in second between executions.
+        """
+        return self._interval
+
+    def _setInterval(self, interval):
+        self._interval = interval if interval > 0 else 1
 
     def __del__(self):
         self.stop()

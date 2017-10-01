@@ -2,6 +2,10 @@ TinyPeriodicTask
 ================
 Set a simple periodic execution of a function.
 
+What I would like (developping):
+- Change Interval when running. 
+- Interprete other units time as interval: minutes, hour, day, ...
+- Set interval to a particular time of the day, or date.
 
 Concepts
 --------
@@ -11,12 +15,17 @@ Concepts
 The interval time is running in a deamon thread. This to ensure
 the time has no interference to the main execution, and vice versa.
 
+By design, when you start a tinyPeriodicTask instance, 
+the runner will call the callback function immediatly before waiting 
+for the next interval. 
+
 When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
 
 .. code-block:: python
-
     task = TinyPeriodicTask(3, task, message='that') 
+    # this will call the task function every 3 seconds 
+    #  using message as parameter.
 
 Usage
 -----
@@ -36,13 +45,35 @@ Usage
     task2.start()
 
     try:
+        print('Execution en cours')
         #Keep the main process alive 
         # otherwise the task will be executed only one time
         while True:
             time.sleep(0.5)
 
     except KeyboardInterrupt:
-        task.stop()
+        task1.stop()
+        task2.stop()
+        print('Loop stopped')
+
+Result:
+
+.. code-block:: batch
+
+    $ python exemple.py
+    I'm working on that
+    Execution en cours
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    I'm working on this
+    I'm working on that
+    I'm working on this
+    Loop stopped
 
 Detail
 ------
@@ -84,8 +115,8 @@ Stop or pause the periodic runner.
 Extra-fonctionnalities:
 -----------------------
 
-useThis
-~~~~~~~~
+Changing parameter(s) when running
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Let you change the parameter value.
 
 This will restart the runner once the parameters changed. 
@@ -96,4 +127,3 @@ This will restart the runner once the parameters changed.
 
 + ***args, **kwargs** parameter(s) to use when executing the callback function.
 + **Exception** If callback is not a callable function
-
