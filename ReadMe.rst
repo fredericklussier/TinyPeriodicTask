@@ -43,3 +43,41 @@ Usage
 
     except KeyboardInterrupt:
         task.stop()
+
+Detail
+------
+init
+~~~~~~~~
+Set a periodic execution of a task.
+
+.. code-block:: python
+
+  class TinyPeriodicTask(interval, callback, *args, **kwargs)
+
+:interval: (number) time in second between execution. 0 or negatif number is changed to 1.
+:callback: (function) callable function to call once the interval is reach.
+:*args, **kwargs: parameter(s) to use when executing the callback function.
+
+:Exception: If callback is not a callable function
+
+start
+~~~~~~~~
+Start the periodic runner
+
+If the runner is stopped, it will restart.
+
+.. code-block:: python
+
+  tinyPeriodicTask = TinyPeriodicTask(5, anyCallback)
+  tinyPeriodicTask.start()
+
+stop
+~~~~~~~~
+Stop or pause the periodic runner.
+
+.. code-block:: python
+
+  tinyPeriodicTask = TinyPeriodicTask(5, anyCallback)
+  tinyPeriodicTask.start()
+  ...
+  tinyPeriodicTask.stop()
