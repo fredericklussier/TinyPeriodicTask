@@ -58,11 +58,11 @@ class TinyPeriodicTask(object):
         self._isRunning = False
         self._callback = functools.partial(callback, *args, **kwargs)
         # End the thread once setted.
-        self._ceaseContinuous = threading.Event()
+        self._cease = threading.Event()
 
     def __del__(self):
         self.stop()
-        self._ceaseContinuous = None
+        self._cease = None
 
     def start(self):
         """
@@ -71,13 +71,13 @@ class TinyPeriodicTask(object):
         if self._isRunning:
             return
 
-        if self._ceaseContinuous.is_set():
-            self._ceaseContinuous.clear()  # restart
+        if self._cease.is_set():
+            self._cease.clear()  # restart
 
         class ScheduleThread(threading.Thread):
             @classmethod
             def run(cls):
-                while not self._ceaseContinuous.is_set():
+                while not self._cease.is_set():
                     self._run()
                     time.sleep(self._interval)
 
@@ -93,5 +93,6 @@ class TinyPeriodicTask(object):
         """
         Stop the periodic runner
         """
-        self._ceaseContinuous.set()
+        self._cease.set()
         self._isRunning = False
+        
