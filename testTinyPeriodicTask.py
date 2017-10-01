@@ -8,6 +8,52 @@ from TinyPeriodicTask import TinyPeriodicTask
 
 class TinyPeriodicTaskTest(unittest.TestCase):
 
+    def testIntervalProperty_ShouldReturnInterval(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        # Action
+        task = TinyPeriodicTask(5, callableFunction)
+
+        # Assert
+        self.assertEqual(task.interval, 5)
+
+    def testIntervalProperty_Using0_ShouldSetIntervalTo1(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        # Action
+        task = TinyPeriodicTask(0, callableFunction)
+
+        # Assert
+        self.assertEqual(task.interval, 1)
+
+    def testIntervalProperty_UsingNegativeInterval_ShouldSetIntervalTo1(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        # Action
+        task = TinyPeriodicTask(-1, callableFunction)
+
+        # Assert
+        self.assertEqual(task.interval, 1)
+
+    def testSetIntervalProperty__ShouldSetInterval(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        task = TinyPeriodicTask(-1, callableFunction)
+
+        # Action
+        task.interval = 0.5
+
+        # Assert
+        self.assertEqual(task.interval, 0.5)
+
     def testTime_ShouldAlmostBeTheIntervalTime(self):
         # Arrange
         start_time = 0
@@ -89,7 +135,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
             count += 1
             self.assertEqual(parameter, 12)
 
-        # Execute tnhe callback each 1 second
+        # Execute the callback each 1 second
         task = TinyPeriodicTask(1, callableFunction, parameter=12)
 
         # Action
@@ -103,6 +149,34 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
+    def testChangeInterval_ShouldUseTheNewInterval(self):
+        # Arrange
+        count = 0
+        start_time = 0
+
+        def callableFunction(parameter="this"):
+            nonlocal count, start_time
+            expected = 1 if count < 3 else 2
+            if (count > 0 and count != 3):
+                self.assertAlmostEqual(
+                    time.time() - start_time, expected, 0, "when count {0}".format(count))
+            count += 1
+            start_time = time.time()
+
+        # Execute the callback each 0.1 second
+        task = TinyPeriodicTask(1, callableFunction)
+
+        # Action
+        start_time = time.time()
+        task.start()
+
+        while count < 5:
+            if count == 3 and task.interval == 1:
+                task.interval = 2
+            time.sleep(0.01)
+
+        task.stop()
+
     def testChangeParameter_ShouldUseNewSetOfParameters(self):
         # Arrange
         count = 0
@@ -110,12 +184,10 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         def callableFunction(parameter):
             nonlocal count
             expected = 12 if count < 3 else 10
-            try:
-                self.assertEqual(parameter, expected)
-            finally:
-                count += 1
+            self.assertEqual(parameter, expected)
+            count += 1
 
-        # Execute tnhe callback each 0.1 second
+        # Execute the callback each 0.1 second
         task = TinyPeriodicTask(0.1, callableFunction, parameter=12)
 
         # Action

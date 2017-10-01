@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import functools
+from datetime import datetime, timedelta
 import time
 import threading
 
@@ -35,7 +36,7 @@ Usage:
 
     try:
         print('Execution en cours')
-        #Keep the main process alive 
+        #Keep the main process alive
         # otherwise the task will be executed only one time
         while True:
             time.sleep(0.5)
@@ -84,12 +85,28 @@ class TinyPeriodicTask(object):
         self._cease = threading.Event()
 
     @property
+    def isRunning(self):
+        """
+        return true when runner is running otherwise false.
+        """
+        return self._interval
+
+    @property
     def interval(self):
         """
         this is the interval property that mention to the runner
         the time in second between executions.
         """
         return self._interval
+
+    @interval.setter
+    def interval(self, interval):
+        if self._isRunning:
+            self.stop()
+            self._setInterval(interval)
+            self.start()
+        else:
+            self._setInterval(interval)
 
     def _setInterval(self, interval):
         self._interval = interval if interval > 0 else 1
@@ -111,9 +128,17 @@ class TinyPeriodicTask(object):
         class Runner(threading.Thread):
             @classmethod
             def run(cls):
+                nextRunAt = cls.setNextRun()
+
                 while not self._cease.is_set():
-                    self._run()
-                    time.sleep(self._interval)
+                    if datetime.now() >= nextRunAt:
+                        self._run()
+                        nextRunAt = cls.setNextRun()
+
+            @classmethod
+            def setNextRun(cls):
+                return datetime.now() + \
+                    timedelta(seconds=self._interval)
 
         runner = Runner()
         runner.setDaemon(True)
@@ -137,4 +162,5 @@ class TinyPeriodicTask(object):
         Stop the periodic runner
         """
         self._cease.set()
+        time.sleep(0.1)  # let the thread closing correctly.
         self._isRunning = False

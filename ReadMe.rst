@@ -140,8 +140,19 @@ Stop or pause the periodic runner.
 
 Extra-fonctionnalities:
 -----------------------
+Changing interval will running
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You can change the interval value during the runner execution.
+This is usefull when you want to change the rhythm over time:
+let say every 5 seconds during the day to 3600 (1hour) during 
+the night. however, TinyPeriodicTask does not take those 
+conditions (day and night) yet. So you have to manage them in your code.
 
-Changing parameter(s) when running
+.. code-block:: python
+
+  tinyPeriodicTask.interval = 3600 #1 hour
+
+Changing parameter(s) will running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Let you change the parameter value.
 
