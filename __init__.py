@@ -3,7 +3,7 @@
 from .TinyPeriodicTask import TinyPeriodicTask
 
 __author__ = "Frederick Lussier <frederick.lussier@hotmail.com>"
-__status__ = "prod"
+__status__ = "dev"
 __version__ = "1.2.0"
 __date__ = "september 30th 2017"
 

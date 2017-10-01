@@ -2,6 +2,10 @@ TinyPeriodicTask
 ================
 Set a simple periodic execution of a function.
 
+Status
+------
+In development
+
 Features
 --------
 * Set a periodic task with or without parameter(s).
@@ -11,12 +15,23 @@ Features
 * No external dependencies.
 * Tested on Python 3.5 and 3.6.
 
+Installation
+------------
+please read https://help.github.com/articles/cloning-a-repository/
+
+.. code-block:: batch
+
+$ git clone https://github.com/fredericklussier/TinyPeriodicTask.git
+
+In the future, I expect to have a setup using pip.
+
 Working on (developping)
 -------------------------
 * Change Interval when running. (next version)
 * having an option for logging the execution.
 * Interprete other units time as interval: minutes, hour, day, ...
 * Set interval to a particular time of the day, or date.
+* Prepare a setup in pip
 
 Concepts
 --------
