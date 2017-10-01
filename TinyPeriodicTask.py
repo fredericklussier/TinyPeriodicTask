@@ -20,7 +20,7 @@ any parameters you need to use when executing the callback. like this:
 
 Usage:
 .. code-block:: python
-  from PeriodicTask import PeriodicTask
+  from TinyPeriodicTask import TinyPeriodicTask
 
   #The function to periodically run
   def task(message='this'):
@@ -55,6 +55,7 @@ class TinyPeriodicTask(object):
          callback function.
         """
         self._interval = interval if interval > 0 else 1
+        self._isRunning = False
         self._callback = functools.partial(callback, *args, **kwargs)
         # End the thread once setted.
         self._ceaseContinuous = threading.Event()
@@ -67,6 +68,9 @@ class TinyPeriodicTask(object):
         """
         Start the periodic runner
         """
+        if self._isRunning:
+            return
+
         if self._ceaseContinuous.is_set():
             self._ceaseContinuous.clear()  # restart
 
@@ -80,6 +84,7 @@ class TinyPeriodicTask(object):
         scheduleThread = ScheduleThread()
         scheduleThread.setDaemon(True)
         scheduleThread.start()
+        self._isRunning = True
 
     def _run(self):
         self._callback()
@@ -89,3 +94,4 @@ class TinyPeriodicTask(object):
         Stop the periodic runner
         """
         self._ceaseContinuous.set()
+        self._isRunning = False

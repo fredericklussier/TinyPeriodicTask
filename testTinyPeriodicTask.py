@@ -58,6 +58,29 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
+    def testStart_TryToRestart_ShouldDoNothing(self):
+            # Arrange
+        count = 0
+
+        def callableFunction():
+            nonlocal count
+            count += 1
+
+        # Execute callback each 0.5 second
+        task = TinyPeriodicTask(0.5, callableFunction)
+        task.start()
+        
+        # Action
+        task.start()
+
+        while count < 5:
+            time.sleep(0.1)
+
+        task.stop()
+
+        # Assert
+        self.assertEqual(count, 5)
+
     def testStart_UsingParameter_ShouldExecuteTheCallbackFunction(self):
         # Arrange
         count = 0
