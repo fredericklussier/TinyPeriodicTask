@@ -104,6 +104,34 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
+    def testChangeParameter_ShouldUseNewSetOfParameters(self):
+        # Arrange
+        count = 0
+
+        def callableFunction(parameter):
+            nonlocal count
+            expected = 12 if count < 3 else 10
+            try:
+                self.assertEqual(parameter, expected)
+            finally:
+                count += 1
+
+        # Execute tnhe callback each 0.1 second
+        task = TinyPeriodicTask(0.1, callableFunction, parameter=12)
+
+        # Action
+        task.start()
+
+        while count < 5:
+            if count >= 3:
+                task.useThis(parameter=10)
+            time.sleep(0.01)
+
+        task.stop()
+
+        # Assert
+        self.assertEqual(count, 5)
+
     def testReStart_ShouldStartTheExecution(self):
         # Arrange
         countCalled = 0

@@ -74,20 +74,32 @@ class TinyPeriodicTask(object):
         if self._cease.is_set():
             self._cease.clear()  # restart
 
-        class ScheduleThread(threading.Thread):
+        class Runner(threading.Thread):
             @classmethod
             def run(cls):
                 while not self._cease.is_set():
                     self._run()
                     time.sleep(self._interval)
 
-        scheduleThread = ScheduleThread()
-        scheduleThread.setDaemon(True)
-        scheduleThread.start()
+        runner = Runner()
+        runner.setDaemon(True)
+        runner.start()
         self._isRunning = True
 
     def _run(self):
         self._callback()
+
+    def useThis(self, *args, **kwargs):
+        """
+        Change parameter of the callback function.
+        This will restart the runner once the parameters changed. 
+
+        :param *args, **kwargs: parameter(s) to use when executing the
+         callback function.
+        """
+        self.stop()
+        self._callback = functools.partial(self._callback, *args, **kwargs)
+        self.start()
 
     def stop(self):
         """
@@ -95,4 +107,3 @@ class TinyPeriodicTask(object):
         """
         self._cease.set()
         self._isRunning = False
-        

@@ -80,3 +80,20 @@ Stop or pause the periodic runner.
   tinyPeriodicTask.start()
   ...
   tinyPeriodicTask.stop()
+
+Extra-fonctionnalities:
+-----------------------
+
+useThis
+~~~~~~~~
+Let you change the parameter value.
+
+This will restart the runner once the parameters changed. 
+
+.. code-block:: python
+
+  tinyPeriodicTask.useThis(*args, **kwargs)
+
++ ***args, **kwargs** parameter(s) to use when executing the callback function.
++ **Exception** If callback is not a callable function
+
