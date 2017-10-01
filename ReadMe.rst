@@ -2,10 +2,21 @@ TinyPeriodicTask
 ================
 Set a simple periodic execution of a function.
 
-What I would like (developping):
-- Change Interval when running. 
-- Interprete other units time as interval: minutes, hour, day, ...
-- Set interval to a particular time of the day, or date.
+Features
+--------
+* Set a periodic task with or without parameter(s).
+* Start a runner to call a task to a specified interval.
+* Stop the runner as well as restart it.
+* Change parameter(s) during running. 
+* No external dependencies.
+* Tested on Python 3.5 and 3.6.
+
+Working on (developping)
+-------------------------
+* Change Interval when running. (next version)
+* having an option for logging the execution.
+* Interprete other units time as interval: minutes, hour, day, ...
+* Set interval to a particular time of the day, or date.
 
 Concepts
 --------
