@@ -42,8 +42,8 @@ The interval time is running in a deamon thread. This to ensure
 the time has no interference to the main execution, and vice versa.
 
 By design, when you start a tinyPeriodicTask instance, 
-the runner will call the callback function immediatly before waiting 
-for the next interval. 
+the runner will delay the call to the callback function 
+according to the interval. 
 
 When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
