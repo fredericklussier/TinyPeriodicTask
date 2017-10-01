@@ -54,11 +54,10 @@ Set a periodic execution of a task.
 
   class TinyPeriodicTask(interval, callback, *args, **kwargs)
 
-**interval** (number) time in second between execution. 0 or negatif number is changed to 1.
-**callback** (function) callable function to call once the interval is reach.
-***args, **kwargs** parameter(s) to use when executing the callback function.
-
-:Exception: If callback is not a callable function
++ **interval** (number) time in second between execution. 0 or negatif number is changed to 1.
++ **callback** (function) callable function to call once the interval is reach.
++ ***args, **kwargs** parameter(s) to use when executing the callback function.
++ **Exception** If callback is not a callable function
 
 start
 ~~~~~~~~
