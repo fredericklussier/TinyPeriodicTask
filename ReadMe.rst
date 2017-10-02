@@ -148,7 +148,7 @@ Stop or pause the periodic runner.
 
 Extra-fonctionnalities:
 -----------------------
-Changing interval will running
+Changing interval while running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You can change the interval value during the runner execution.
 This is usefull when you want to change the rhythm over time:
@@ -160,7 +160,7 @@ conditions (day and night) yet. So you have to manage them in your code.
 
   tinyPeriodicTask.interval = 3600 #1 hour
 
-Changing parameter(s) will running
+Changing parameter(s) while running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Let you change the parameter value.
 
