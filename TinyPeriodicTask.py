@@ -89,7 +89,7 @@ class TinyPeriodicTask(object):
         """
         return true when runner is running otherwise false.
         """
-        return self._interval
+        return self._isRunning
 
     @property
     def interval(self):

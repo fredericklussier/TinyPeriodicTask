@@ -7,7 +7,9 @@ from TinyPeriodicTask import TinyPeriodicTask
 
 
 class TinyPeriodicTaskTest(unittest.TestCase):
-
+    """
+    Interval Property
+    """
     def testIntervalProperty_ShouldReturnInterval(self):
         # Arrange
         def callableFunction():
@@ -41,7 +43,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(task.interval, 1)
 
-    def testSetIntervalProperty__ShouldSetInterval(self):
+    def testIntervalProperty_Set_ShouldSetInterval(self):
         # Arrange
         def callableFunction():
             pass
@@ -54,7 +56,56 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(task.interval, 0.5)
 
-    def testTime_ShouldAlmostBeTheIntervalTime(self):
+    """
+    isRunning
+    """
+    def testIsRunningProperty_Init_ShouldReturnFalse(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        task = TinyPeriodicTask(-1, callableFunction)
+
+        # Action
+        expectedValue = task.isRunning
+
+        # Assert
+        self.assertFalse(expectedValue)
+
+    def testIsRunningProperty_WhenRunning_ShouldReturnTrue(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        task = TinyPeriodicTask(-1, callableFunction)
+
+        # Action
+        task.start()
+        expectedValue = task.isRunning
+        task.stop()
+
+        # Assert
+        self.assertTrue(expectedValue)
+
+    def testIsRunningProperty_WhenCeaseRunning_ShouldReturnFalse(self):
+        # Arrange
+        def callableFunction():
+            pass
+
+        task = TinyPeriodicTask(0.1, callableFunction)
+
+        # Action
+        task.start()
+        task.stop()
+        expectedValue = task.isRunning
+
+        # Assert
+        self.assertFalse(expectedValue)
+
+    """
+    Runner
+    """
+    def testRunner_ShouldAlmostBeTheIntervalTime(self):
         # Arrange
         start_time = 0
         count = 0
@@ -81,7 +132,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
-    def testStart_UsingNoParameter_ShouldExecuteTheCallbackFunction(self):
+    def testRunner_UsingNoParameter_ShouldExecuteTheCallbackFunction(self):
         # Arrange
         count = 0
 
@@ -103,30 +154,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
-    def testStart_TryToRestart_ShouldDoNothing(self):
-            # Arrange
-        count = 0
-
-        def callableFunction():
-            nonlocal count
-            count += 1
-
-        # Execute callback each 0.5 second
-        task = TinyPeriodicTask(0.5, callableFunction)
-        task.start()
-        
-        # Action
-        task.start()
-
-        while count < 5:
-            time.sleep(0.1)
-
-        task.stop()
-
-        # Assert
-        self.assertEqual(count, 5)
-
-    def testStart_UsingParameter_ShouldExecuteTheCallbackFunction(self):
+    def testRunner_UsingParameter_ShouldExecuteTheCallbackFunction(self):
         # Arrange
         count = 0
 
@@ -149,7 +177,30 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
-    def testChangeInterval_ShouldUseTheNewInterval(self):
+    def testRunner_RestartWhenRunning_ShouldDoNothing(self):
+            # Arrange
+        count = 0
+
+        def callableFunction():
+            nonlocal count
+            count += 1
+
+        # Execute callback each 0.5 second
+        task = TinyPeriodicTask(0.5, callableFunction)
+        task.start()
+        
+        # Action
+        task.start()
+
+        while count < 5:
+            time.sleep(0.1)
+
+        task.stop()
+
+        # Assert
+        self.assertEqual(count, 5)
+
+    def testRunner_ChangeInterval_ShouldUseTheNewInterval(self):
         # Arrange
         count = 0
         start_time = 0
@@ -177,7 +228,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
 
         task.stop()
 
-    def testChangeParameter_ShouldUseNewSetOfParameters(self):
+    def testRunner_ChangeParameter_ShouldUseNewSetOfParameters(self):
         # Arrange
         count = 0
 
@@ -203,7 +254,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         # Assert
         self.assertEqual(count, 5)
 
-    def testReStart_ShouldStartTheExecution(self):
+    def testRunner_Restart_ShouldStartTheExecution(self):
         # Arrange
         countCalled = 0
 

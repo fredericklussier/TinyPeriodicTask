@@ -1,1 +1,7 @@
+
 __pycache__/
+
+# Unit test and reports
+coverage_html_report/
+.coverage
+.coverage.*

@@ -1,8 +1,12 @@
 TinyPeriodicTask
 ================
 
+
 .. image:: https://travis-ci.org/fredericklussier/TinyPeriodicTask.svg?branch=master
     :target: https://travis-ci.org/fredericklussier/TinyPeriodicTask
+
+.. image:: https://coveralls.io/repos/github/fredericklussier/TinyPeriodicTask/badge.svg?branch=master
+    :target: https://coveralls.io/github/fredericklussier/TinyPeriodicTask?branch=master
 
 Set a simple periodic execution of a function.
 
@@ -46,8 +50,8 @@ The interval time is running in a deamon thread. This to ensure
 the time has no interference to the main execution, and vice versa.
 
 By design, when you start a tinyPeriodicTask instance, 
-the runner will delay the call to the callback function 
-according to the interval. 
+the runner will delay the first call to the callback function 
+according to the interval.
 
 When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
