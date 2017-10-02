@@ -1,5 +1,9 @@
 TinyPeriodicTask
 ================
+
+.. image:: https://travis-ci.org/fredericklussier/TinyPeriodicTask.svg?branch=master
+    :target: https://travis-ci.org/fredericklussier/TinyPeriodicTask
+
 Set a simple periodic execution of a function.
 
 Status
@@ -164,3 +168,9 @@ This will restart the runner once the parameters changed.
 
 + ***args, **kwargs** parameter(s) to use when executing the callback function.
 + **Exception** If callback is not a callable function
+
+License
+-------
+Distributed under the MIT license: https://opensource.org/licenses/MIT
+
+Copyright (c) 2017 Frédérick Lussier (www.linkedin.com/in/frederick-lussier-757b849)
