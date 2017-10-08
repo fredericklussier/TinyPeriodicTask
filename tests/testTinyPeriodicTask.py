@@ -3,7 +3,7 @@
 import time
 import unittest
 
-from TinyPeriodicTask import TinyPeriodicTask
+from tinyPeriodicTask import TinyPeriodicTask
 
 
 class TinyPeriodicTaskTest(unittest.TestCase):
@@ -210,7 +210,8 @@ class TinyPeriodicTaskTest(unittest.TestCase):
             expected = 1 if count < 3 else 2
             if (count > 0 and count != 3):
                 self.assertAlmostEqual(
-                    time.time() - start_time, expected, 0, "when count {0}".format(count))
+                    time.time() - start_time, expected, 0, 
+                    "when count {0}".format(count))
             count += 1
             start_time = time.time()
 
