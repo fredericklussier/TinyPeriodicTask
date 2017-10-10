@@ -25,13 +25,12 @@ Features
 
 Installation
 ------------
-please read https://help.github.com/articles/cloning-a-repository/
 
 .. code-block:: batch
 
-    $ git clone https://github.com/fredericklussier/TinyPeriodicTask.git
+    pip install tinyPeriodicTask
 
-In the future, I expect to have a setup using pip.
+If you want all, please read https://help.github.com/articles/cloning-a-repository/
 
 Concepts
 --------
