@@ -8,6 +8,9 @@ TinyPeriodicTask
 .. image:: https://coveralls.io/repos/github/fredericklussier/TinyPeriodicTask/badge.svg?branch=master
     :target: https://coveralls.io/github/fredericklussier/TinyPeriodicTask?branch=master
 
+.. image:: https://badge.fury.io/py/tinyPeriodicTask.svg
+    :target: https://badge.fury.io/py/tinyPeriodicTask
+
 Set a simple periodic execution of a function.
 
 Status
