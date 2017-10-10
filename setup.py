@@ -28,7 +28,7 @@ def read_file(filename):
 
 setup(
     name='tinyPeriodicTask',
-    packages=['schedule'],
+    packages=['tinyPeriodicTask'],
     version=SCHEDULE_VERSION,
     description='Simple periodic execution of a function.',
     long_description=read_file('README.rst'),
@@ -40,7 +40,6 @@ setup(
     keywords=[
         'periodic', 'jobs', 'job scheduler', 'job scheduling'
     ],
-    packages=['tinyPeriodicTask'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
