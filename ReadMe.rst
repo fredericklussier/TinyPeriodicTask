@@ -60,7 +60,7 @@ Usage
 
 .. code-block:: python
 
-    from TinyPeriodicTask import TinyPeriodicTask
+    from tinyPeriodicTask import TinyPeriodicTask
 
     #The function to periodically run
     def task(message='this'):
@@ -128,12 +128,12 @@ Set an interval specifying its unit (second, minute, hour, day)
 
 .. code-block:: python
 
-    from TinyPeriodicTask.IntervalSettings import IntervalSettings
-    from TinyPeriodicTask.IntervalUnitEnum import IntervalUnit
-    from TinyPeriodicTask import TinyPeriodicTask
+    from tinyPeriodicTask.IntervalSettings import IntervalSettings
+    from tinyPeriodicTask.IntervalUnitEnum import IntervalUnit
+    from tinyPeriodicTask import TinyPeriodicTask
 
     settings = IntervalSettings(5, IntervalUnit.hour)
-    task = TinyPeriodicTask(settings, tourTaskFunction)
+    task = TinyPeriodicTask(settings, yourTaskFunction)
 
 2- every day at
 ~~~~~~~~~
@@ -141,11 +141,11 @@ Set a job every day
 
 .. code-block:: python
 
-    from TinyPeriodicTask.StartAtSettings import StartAtSettings
-    from TinyPeriodicTask import TinyPeriodicTask
+    from tinyPeriodicTask.StartAtSettings import StartAtSettings
+    from tinyPeriodicTask import TinyPeriodicTask
 
     settings = StartAtSettings("15:30")
-    task = TinyPeriodicTask(settings, tourTaskFunction)
+    task = TinyPeriodicTask(settings, yourTaskFunction)
 
 start
 ~~~~~~~~
