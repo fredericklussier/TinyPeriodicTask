@@ -122,8 +122,8 @@ Settings:
 ~~~~~~~~~
 Create and transmit a setting instance.
 
-every unit
-----------
+1- every unit
+~~~~~~~~~
 Set an interval specifying its unit (second, minute, hour, day)
 
 .. code-block:: python
@@ -135,8 +135,8 @@ Set an interval specifying its unit (second, minute, hour, day)
     settings = IntervalSettings(5, IntervalUnit.hour)
     task = TinyPeriodicTask(settings, tourTaskFunction)
 
-every day at
-----------
+2- every day at
+~~~~~~~~~
 Set a job every day
 
 .. code-block:: python
