@@ -4,7 +4,11 @@ import functools
 from datetime import datetime, timedelta
 import time
 import threading
-
+import numbers
+from .IntervalSettings import IntervalSettings
+from .IntervalUnitEnum import IntervalUnit
+from .StartAtSettings import StartAtSettings
+from .SettingsTypeEnum import SettingsType
 """
 Set a simple periodic execution of a function.
 
@@ -17,7 +21,7 @@ the time has no interference to the main execution, and vice versa.
 When you create an instance of TinyPeriodicTask, you can add
 any parameters you need to use when executing the callback. like this:
   .. code-block:: python
-    task2 = TinyPeriodicTask(3, task, message='that') 
+    task2 = TinyPeriodicTask(3, task, message='that')
 
 Usage:
 .. code-block:: python
@@ -97,7 +101,7 @@ class TinyPeriodicTask(object):
         this is the interval property that mention to the runner
         the time in second between executions.
         """
-        return self._interval
+        return self._interval.getValue()
 
     @interval.setter
     def interval(self, interval):
@@ -109,11 +113,28 @@ class TinyPeriodicTask(object):
             self._setInterval(interval)
 
     def _setInterval(self, interval):
-        self._interval = interval if interval > 0 else 1
+        settingsType = self._getSettingsType(interval)
+        assert settingsType != SettingsType.unknow
 
-    def __del__(self):
-        self.stop()
-        self._cease = None
+        if (settingsType == SettingsType.number):
+            self._interval = IntervalSettings(interval)
+        else:
+            self._interval = interval
+
+    @classmethod
+    def _getSettingsType(cls, value):
+        if isinstance(value, numbers.Number):
+            return SettingsType.number
+        elif isinstance(value, IntervalSettings):
+            return SettingsType.Interval
+        elif isinstance(value, StartAtSettings):
+            return SettingsType.StartAt
+        else:
+            return SettingsType.unknow
+
+    # def __del__(self):
+    #    self.stop()
+    #    self._cease = None
 
     def start(self):
         """
@@ -137,8 +158,8 @@ class TinyPeriodicTask(object):
 
             @classmethod
             def setNextRun(cls):
-                return datetime.now() + \
-                    timedelta(seconds=self._interval)
+                # return datetime.now() + timedelta(seconds=self._interval)
+                return self._interval.nextRunAt()
 
         runner = Runner()
         runner.setDaemon(True)

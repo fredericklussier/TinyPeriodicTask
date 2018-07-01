@@ -1,0 +1,4 @@
+# run test locally
+coverage run -m unittest discover tests
+coverage report
+coverage html

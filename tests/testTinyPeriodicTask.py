@@ -19,7 +19,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         task = TinyPeriodicTask(5, callableFunction)
 
         # Assert
-        self.assertEqual(task.interval, 5)
+        self.assertEqual(task.interval['interval'], 5)
 
     def testIntervalProperty_Using0_ShouldSetIntervalTo1(self):
         # Arrange
@@ -30,7 +30,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         task = TinyPeriodicTask(0, callableFunction)
 
         # Assert
-        self.assertEqual(task.interval, 1)
+        self.assertEqual(task.interval['interval'], 1)
 
     def testIntervalProperty_UsingNegativeInterval_ShouldSetIntervalTo1(self):
         # Arrange
@@ -41,7 +41,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         task = TinyPeriodicTask(-1, callableFunction)
 
         # Assert
-        self.assertEqual(task.interval, 1)
+        self.assertEqual(task.interval['interval'], 1)
 
     def testIntervalProperty_Set_ShouldSetInterval(self):
         # Arrange
@@ -54,7 +54,20 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         task.interval = 0.5
 
         # Assert
-        self.assertEqual(task.interval, 0.5)
+        self.assertEqual(task.interval['interval'], 0.5)
+
+    def testIntervalProperty_UnkownSetting_ShouldRaiseError(self):
+
+        # Arrange
+        def callableFunction():
+            pass
+
+        with self.assertRaises(AssertionError):
+
+            # Action
+            task = TinyPeriodicTask("I'm back", callableFunction)
+
+            # Assert from unittest when assert is trigged
 
     """
     isRunning
@@ -223,7 +236,7 @@ class TinyPeriodicTaskTest(unittest.TestCase):
         task.start()
 
         while count < 5:
-            if count == 3 and task.interval == 1:
+            if count == 3 and task.interval['interval'] == 1:
                 task.interval = 2
             time.sleep(0.01)
 
