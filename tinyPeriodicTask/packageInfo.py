@@ -3,7 +3,7 @@
 
 PACKAGE_NAME = "tinyPeriodicTask"
 AUTHOR = "Frederick Lussier <frederick.lussier@hotmail.com>"
-VERSION = "1.4.4"
+VERSION = "1.4.5"
 STATUS = ["1 - Planning",
           "2 - Pre-Alpha",
           "3 - Alpha",

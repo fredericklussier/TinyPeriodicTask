@@ -18,7 +18,7 @@ import sys
 from setuptools import setup, find_packages
 
 SCHEDULE_DOWNLOAD_URL = (
-    'https://github.com/fredericklussier/TinyPeriodicTask/' + VERSION
+    'https://github.com/fredericklussier/TinyPeriodicTask/tree/' + VERSION
 )
 
 
@@ -29,13 +29,28 @@ def read_file(filename):
     with codecs.open(filename, 'r', 'utf8') as f:
         return f.read()
 
+_LONG_DESCRIPTION = """
+Simple periodic execution of a function at every laps 
+of time or every day at specifique time.
+
+The interval time is running in a deamon thread. This to ensure
+the time has no interference to the main execution, and vice versa.
+
+By design, when you start a tinyPeriodicTask instance,
+the runner will delay the first call to the callback function
+according to the interval.
+
+When you create an instance of TinyPeriodicTask, you can add
+any parameters you need to use when executing the callback. like this:
+
+"""
 
 setup(
     name=PACKAGE_NAME,
-    packages=['tinyPeriodicTask'],
+    packages=[PACKAGE_NAME],
     version=VERSION,
     description='Simple periodic execution of a function.',
-    long_description=read_file('ReadMe.rst'),
+    long_description=_LONG_DESCRIPTION,
     license='MIT',
     author=AUTHOR.split("<")[0].strip(),
     author_email=(AUTHOR.split("<")[1])[:-1],
