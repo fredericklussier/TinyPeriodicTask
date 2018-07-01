@@ -9,8 +9,8 @@ $ pip install --upgrade twine wheel
 $ python setup.py sdist bdist_wheel --universal
 $ twine upload dist/*
 """
-from .packageInfo import (PACKAGE_NAME, AUTHOR,
-                          VERSION, STATUS)
+from tinyPeriodicTask.packageInfo import (PACKAGE_NAME, AUTHOR,
+                                          VERSION, STATUS)
 
 import codecs
 import os
