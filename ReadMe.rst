@@ -118,6 +118,33 @@ Set a periodic execution of a task.
 + ***args, **kwargs** parameter(s) to use when executing the callback function.
 + **Exception** If callback is not a callable function
 
+Settings:
+~~~~~~~~~
+Create and transmit a setting instance.
+
+every unit
+----------
+Set an interval specifying its unit (second, minute, hour, day)
+
+.. code-block:: python
+        from TinyPeriodicTask.IntervalSettings import IntervalSettings
+        from TinyPeriodicTask.IntervalUnitEnum import IntervalUnit
+        from TinyPeriodicTask import TinyPeriodicTask
+
+        settings = IntervalSettings(5, IntervalUnit.hour)
+        task = TinyPeriodicTask(settings, tourTaskFunction)
+
+Specific time every day
+-----------------------
+Set a job every day
+
+.. code-block:: python
+        from TinyPeriodicTask.StartAtSettings import StartAtSettings
+        from TinyPeriodicTask import TinyPeriodicTask
+
+        settings = StartAtSettings("15:30")
+        task = TinyPeriodicTask(settings, tourTaskFunction)
+
 start
 ~~~~~~~~
 Start the periodic runner
