@@ -135,8 +135,8 @@ Set an interval specifying its unit (second, minute, hour, day)
     settings = IntervalSettings(5, IntervalUnit.hour)
     task = TinyPeriodicTask(settings, tourTaskFunction)
 
-Specific time every day
------------------------
+every day at
+----------
 Set a job every day
 
 .. code-block:: python
