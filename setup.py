@@ -1,6 +1,6 @@
 """
 Publish a new version:
-Change version in packageInfo file (lifepo4weredPyController)
+Change version in packageInfo file (tinyPeriodicTask)
 pull changes
 Execute:
 $ git tag X.Y.Z -m "Release X.Y.Z"
@@ -17,9 +17,8 @@ import os
 import sys
 from setuptools import setup, find_packages
 
-SCHEDULE_VERSION = '1.4.1'
 SCHEDULE_DOWNLOAD_URL = (
-    'https://github.com/fredericklussier/TinyPeriodicTask/' + SCHEDULE_VERSION
+    'https://github.com/fredericklussier/TinyPeriodicTask/' + VERSION
 )
 
 
